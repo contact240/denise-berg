@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denise Esteves — Internacionalização de Negócios | DBerg Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --surface:#121214;
+    --surface-2:#18181b;
+    --ivory:#ece8de;
+    --ivory-dim:#a9a59a;
+    --muted:#726f66;
+    --brass:#b8925a;
+    --brass-dim:#8a6c44;
+    --line:#28282a;
+    --line-soft:#1d1d1f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--brass);color:#0a0a0b;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--brass);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    letter-spacing:-0.01em;
+  }
+
+  .wrap{
+    max-width:1140px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;
+    z-index:50;
+    background:rgba(10,10,11,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--brass);}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    border:1px solid var(--line);
+    padding:10px 20px;
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{border-color:var(--brass);color:var(--brass);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:120px;
+    padding-bottom:80px;
+  }
+  .hero-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 75%);
+    opacity:0.6;
+  }
+  .hero-content{position:relative;z-index:2;}
+  .hero h1{
+    font-size:clamp(34px,5.4vw,64px);
+    line-height:1.12;
+    max-width:820px;
+    margin:26px 0 28px;
+    color:var(--ivory);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--brass);
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--ivory-dim);
+    max-width:560px;
+    margin-bottom:40px;
+    font-weight:300;
+  }
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--brass);
+    color:#0a0a0b;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    padding:16px 28px;
+    font-weight:500;
+    transition:all .25s ease;
+  }
+  .btn-primary:hover{background:#cba36e;transform:translateY(-1px);}
+  .btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--ivory-dim);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    padding:16px 8px;
+    border-bottom:1px solid var(--line);
+    transition:all .25s ease;
+  }
+  .btn-ghost:hover{color:var(--brass);border-color:var(--brass);}
+  .hero-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+
+  .hero-tag{
+    position:absolute;
+    right:32px;
+    bottom:56px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.05em;
+    text-align:right;
+    line-height:1.8;
+    display:none;
+  }
+  @media(min-width:900px){.hero-tag{display:block;}}
+
+  /* SECTION SHELL */
+  section{
+    padding:120px 0;
+    position:relative;
+    border-top:1px solid var(--line-soft);
+  }
+  .section-head{
+    max-width:640px;
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3.4vw,40px);
+    margin-top:20px;
+    color:var(--ivory);
+  }
+  .section-head p{
+    color:var(--ivory-dim);
+    font-size:16px;
+    margin-top:18px;
+    max-width:520px;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* BELIEF BREAK */
+  .beliefs{
+    display:grid;
+    gap:1px;
+    background:var(--line-soft);
+    border:1px solid var(--line-soft);
+  }
+  .belief-row{
+    display:grid;
+    grid-template-columns:1fr 40px 1fr;
+    align-items:center;
+    background:var(--bg);
+    padding:32px;
+    gap:20px;
+  }
+  @media(max-width:760px){
+    .belief-row{grid-template-columns:1fr;gap:12px;padding:24px;}
+    .belief-arrow{display:none;}
+  }
+  .belief-old{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--muted);
+    text-decoration:line-through;
+    text-decoration-color:#4a4842;
+    text-decoration-thickness:1px;
+  }
+  .belief-arrow{
+    color:var(--brass);
+    font-size:18px;
+    text-align:center;
+  }
+  .belief-new{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-style:italic;
+    color:var(--ivory);
+    line-height:1.4;
+  }
+
+  /* REACH / MAP */
+  .reach{background:var(--surface);}
+  .reach-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  @media(max-width:900px){.reach-body{grid-template-columns:1fr;}}
+  .map-box{
+    position:relative;
+    aspect-ratio:4/3;
+    border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at center, rgba(184,146,90,0.06), transparent 70%);
+  }
+  .map-box svg{width:100%;height:100%;}
+  .map-path{
+    fill:none;
+    stroke:var(--brass);
+    stroke-width:1.2;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    transition:stroke-dashoffset 1.8s ease;
+  }
+  .map-box.in .map-path{stroke-dashoffset:0;}
+  .map-dot{fill:var(--ivory);}
+  .map-dot.origin{fill:var(--brass);}
+  .map-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    fill:var(--ivory-dim);
+    letter-spacing:0.05em;
+  }
+  .reach-list{list-style:none;}
+  .reach-list li{
+    display:flex;
+    gap:16px;
+    padding:20px 0;
+    border-bottom:1px solid var(--line-soft);
+    font-size:15px;
+    color:var(--ivory-dim);
+  }
+  .reach-list li:first-child{padding-top:0;}
+  .reach-list b{
+    color:var(--ivory);
+    font-weight:500;
+    min-width:120px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.03em;
+    padding-top:2px;
+  }
+
+  /* TRANSFORMATION */
+  .transform-body{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:70px;
+  }
+  @media(max-width:900px){.transform-body{grid-template-columns:1fr;gap:40px;}}
+  .transform-quote{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(20px,2.4vw,26px);
+    line-height:1.5;
+    color:var(--ivory);
+    border-left:1px solid var(--brass);
+    padding-left:28px;
+  }
+  .transform-copy p{
+    color:var(--ivory-dim);
+    margin-bottom:20px;
+    font-size:16px;
+  }
+  .transform-copy strong{color:var(--ivory);font-weight:500;}
+
+  /* METHOD */
+  .method{background:var(--surface);}
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line-soft);
+    border:1px solid var(--line-soft);
+  }
+  @media(max-width:760px){.pillars{grid-template-columns:1fr;}}
+  .pillar{
+    background:var(--surface);
+    padding:40px 32px;
+  }
+  .pillar .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--brass-dim);
+    letter-spacing:0.1em;
+  }
+  .pillar h3{
+    font-size:21px;
+    margin:16px 0 14px;
+    color:var(--ivory);
+    font-weight:400;
+  }
+  .pillar p{
+    color:var(--ivory-dim);
+    font-size:14.5px;
+  }
+
+  /* ABOUT */
+  .about-body{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:64px;
+    align-items:start;
+  }
+  @media(max-width:900px){.about-body{grid-template-columns:1fr;}}
+  .about-frame{
+    aspect-ratio:3/4;
+    border:1px solid var(--line);
+    background:linear-gradient(160deg,var(--surface-2),var(--bg));
+    display:flex;
+    align-items:flex-end;
+    padding:24px;
+    position:relative;
+  }
+  .about-frame::before{
+    content:'';
+    position:absolute;
+    top:20px;left:20px;right:20px;bottom:20px;
+    border:1px solid var(--line);
+  }
+  .about-frame .cap{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.05em;
+    position:relative;
+    z-index:2;
+  }
+  .about-copy p{
+    color:var(--ivory-dim);
+    margin-bottom:18px;
+    font-size:16px;
+  }
+  .about-copy strong{color:var(--ivory);font-weight:500;}
+  .credentials{
+    display:flex;
+    gap:0;
+    margin-top:32px;
+    border-top:1px solid var(--line-soft);
+  }
+  .credentials div{
+    flex:1;
+    padding:20px 0 0;
+    border-right:1px solid var(--line-soft);
+  }
+  .credentials div:last-child{border-right:none;}
+  .credentials .cnum{
+    font-family:'Fraunces',serif;
+    font-size:24px;
+    color:var(--brass);
+  }
+  .credentials .clabel{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    letter-spacing:0.04em;
+    margin-top:6px;
+  }
+
+  /* FINAL CTA */
+  .final{
+    text-align:left;
+    background:var(--surface);
+    position:relative;
+    overflow:hidden;
+  }
+  .final::before{
+    content:'';
+    position:absolute;
+    right:-10%;top:-30%;
+    width:600px;height:600px;
+    border:1px solid var(--line);
+    border-radius:50%;
+  }
+  .final::after{
+    content:'';
+    position:absolute;
+    right:2%;top:-10%;
+    width:420px;height:420px;
+    border:1px solid var(--line-soft);
+    border-radius:50%;
+  }
+  .final-inner{
+    max-width:640px;
+    position:relative;
+    z-index:2;
+  }
+  .final h2{
+    font-size:clamp(28px,4vw,44px);
+    margin:20px 0 22px;
+  }
+  .final p{
+    color:var(--ivory-dim);
+    font-size:16.5px;
+    margin-bottom:36px;
+    max-width:520px;
+  }
+
+  form.lead{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    max-width:480px;
+  }
+  form.lead input, form.lead select{
+    background:var(--surface-2);
+    border:none;
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:16px 18px;
+    outline:none;
+  }
+  form.lead input::placeholder{color:var(--muted);}
+  form.lead input:focus, form.lead select:focus{background:#1e1e21;}
+  form.lead button{
+    background:var(--brass);
+    color:#0a0a0b;
+    border:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+    padding:18px;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .25s ease;
+  }
+  form.lead button:hover{background:#cba36e;}
+  .form-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:16px;
+  }
+
+  footer{
+    border-top:1px solid var(--line-soft);
+    padding:48px 0;
+  }
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .footer-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">DIGITAL BERG <span>/ BRASIL</span></div>
+    <a href="#contato" class="nav-cta">FALAR COM A DENISE</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">INTERNACIONALIZAÇÃO DE NEGÓCIOS</div>
+    <h1>Sua empresa não precisa ser <em>gigante</em><br>para operar fora do Brasil.<br>Precisa estar estruturada.</h1>
+    <p class="lede">Ajudo empresários brasileiros que já escalam por aqui a construir presença real lá fora — com mapeamento de risco e roteiro próprio, antes de mover qualquer capital.</p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-primary">QUERO ENTENDER MINHA SITUAÇÃO →</a>
+      <a href="#metodo" class="btn-ghost">COMO FUNCIONA</a>
+    </div>
+  </div>
+  <div class="hero-tag">BR → FR / EU<br>ARCHITECTURE FIRST.<br>ACCELERATION SECOND.</div>
+</section>
+
+<section id="crencas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">O QUE VOCÊ PROVAVELMENTE OUVIU</div>
+      <h2>Quase tudo que se repete sobre "vender pra fora" está desatualizado — ou nunca foi verdade para o seu tipo de negócio.</h2>
+    </div>
+    <div class="beliefs reveal">
+      <div class="belief-row">
+        <div class="belief-old">"Internacionalizar é coisa de multinacional, não de PME."</div>
+        <div class="belief-arrow">→</div>
+        <div class="belief-new">Empresa de serviço, tech ou marca premium que já escala aqui tem exatamente o porte que os novos acordos comerciais foram desenhados para beneficiar.</div>
+      </div>
+      <div class="belief-row">
+        <div class="belief-old">"Isso é só logística — manda o produto e vê no que dá."</div>
+        <div class="belief-arrow">→</div>
+        <div class="belief-new">O que decide se você entra e se sustenta lá fora é estrutura societária, fiscal e cultural — não frete.</div>
+      </div>
+      <div class="belief-row">
+        <div class="belief-old">"Preciso falar inglês perfeito e já ter contato no mercado de fora."</div>
+        <div class="belief-arrow">→</div>
+        <div class="belief-new">Precisa de mapeamento de risco e de um roteiro de entrada. A rede certa se constrói depois — com arquitetura, não com sorte.</div>
+      </div>
+      <div class="belief-row">
+        <div class="belief-old">"Essa janela é para daqui a alguns anos."</div>
+        <div class="belief-arrow">→</div>
+        <div class="belief-new">Mercosul-UE já está em vigor. Japão e Vietnã estão em negociação agora. A janela abriu — e ela recompensa quem se move estruturado, não quem se move rápido.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reach" id="alcance">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">ALCANCE E IMPACTO</div>
+      <h2>Sair do Brasil não é abandonar o mercado brasileiro. É deixar de depender só dele.</h2>
+      <p>Cada frente aberta fora reduz o risco concentrado em um único mercado — e multiplica quem pode ser seu cliente, sem multiplicar sua exposição.</p>
+    </div>
+    <div class="reach-body">
+      <div class="map-box reveal" id="mapBox">
+        <svg viewBox="0 0 400 300">
+          <circle class="map-dot origin" cx="120" cy="200" r="4"></circle>
+          <text class="map-label" x="90" y="222">BRASIL</text>
+
+          <path class="map-path" d="M120,200 Q220,80 300,90" style="transition-delay:.1s"></path>
+          <circle class="map-dot" cx="300" cy="90" r="3.5"></circle>
+          <text class="map-label" x="308" y="88">FRANÇA</text>
+
+          <path class="map-path" d="M120,200 Q210,140 280,140" style="transition-delay:.3s"></path>
+          <circle class="map-dot" cx="280" cy="140" r="3.5"></circle>
+          <text class="map-label" x="288" y="144">PORTUGAL</text>
+
+          <path class="map-path" d="M120,200 Q200,220 320,230" style="transition-delay:.5s"></path>
+          <circle class="map-dot" cx="320" cy="230" r="3.5"></circle>
+          <text class="map-label" x="328" y="234">MERCOSUL–UE</text>
+
+          <path class="map-path" d="M120,200 Q160,60 260,40" style="transition-delay:.7s"></path>
+          <circle class="map-dot" cx="260" cy="40" r="3.5"></circle>
+          <text class="map-label" x="185" y="34">EM NEGOCIAÇÃO</text>
+        </svg>
+      </div>
+      <ul class="reach-list reveal">
+        <li><b>MENOS RISCO</b><span>Receita distribuída entre mercados amortece qualquer instabilidade local — cambial, política ou setorial.</span></li>
+        <li><b>MAIS ALCANCE</b><span>O mesmo produto ou serviço passa a valer para um comprador que hoje não sabe que sua empresa existe.</span></li>
+        <li><b>POSICIONAMENTO</b><span>Empresa com presença internacional estruturada compete — e precifica — de forma diferente, inclusive dentro do Brasil.</span></li>
+        <li><b>LEGADO</b><span>O negócio deixa de depender só do fôlego de quem fundou. Passa a ter arquitetura própria para crescer sem você em todas as frentes.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="transformacao">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">O QUE MUDA — NA EMPRESA E EM QUEM A LIDERA</div>
+      <h2>A transformação não é o anúncio de expansão. É deixar de operar no escuro.</h2>
+    </div>
+    <div class="transform-body">
+      <div class="transform-quote reveal">
+        "A maioria dos empresários que atendo não precisa de coragem para sair do Brasil. Precisa de clareza sobre onde estão os riscos reais — e de um roteiro que já leve isso em conta."
+        <div style="margin-top:20px;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:12px;color:var(--muted);letter-spacing:0.04em;">— DENISE ESTEVES</div>
+      </div>
+      <div class="transform-copy reveal">
+        <p>Antes da estrutura, internacionalizar parece uma decisão de tudo ou nada — grande demais para começar, arriscada demais para adiar.</p>
+        <p>Depois da estrutura, ela vira uma sequência de decisões pequenas e reversíveis: qual mercado primeiro, que formato de entrada, o que resolver antes de mover qualquer capital.</p>
+        <p><strong>Isso muda o negócio</strong> — abre receita, reduz dependência de um único mercado, eleva o padrão de precificação e operação.</p>
+        <p><strong>E muda quem lidera</strong> — de quem reage ao que aparece, para quem decide com mapa em mãos. Isso só acontece se estruturado a tempo — e essa é a única promessa que faço.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="metodo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">COMO TRABALHAMOS</div>
+      <h2>Estrutura antes de mover capital — o mesmo princípio nos dois sentidos.</h2>
+      <p>A Digital Berg leva empresas internacionais para o Brasil desde 2025. A DBerg Brasil aplica o mesmo protocolo no sentido inverso: empresas brasileiras que querem construir presença lá fora.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="num">01 — DIAGNÓSTICO</div>
+        <h3>Mapeamento de risco</h3>
+        <p>Leitura estrutural da sua tese de expansão: mercado, operação, cultura e jurídico — antes de qualquer decisão de entrada.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">02 — ARQUITETURA</div>
+        <h3>Roteiro de entrada</h3>
+        <p>Sequência de decisões — societária, fiscal, comercial — desenhada para o seu setor e para o mercado de destino certo, não genérico.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">03 — ACOMPANHAMENTO</div>
+        <h3>Estrutura em movimento</h3>
+        <p>Suporte na primeira fase de execução, com ajustes conforme a operação encontra o terreno real do mercado de destino.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">QUEM CONDUZ</div>
+    </div>
+    <div class="about-body">
+      <div class="about-frame reveal">
+        <div class="cap">DENISE ESTEVES<br>FOUNDER — DIGITAL BERG</div>
+      </div>
+      <div class="about-copy reveal">
+        <p>Mais de uma década estruturando operações complexas no Brasil — tecnologia corporativa, setor bancário, infraestrutura. Hoje, essa mesma leitura operacional é aplicada nos dois sentidos: para empresas internacionais que entram no Brasil, e para empresas brasileiras que constroem presença fora.</p>
+        <p><strong>Base em Paris, raiz no Brasil.</strong> Essa dupla vivência — bicultural, bilíngue — é o que permite traduzir não só o idioma, mas a lógica de decisão de cada lado, sem depender de intermediário.</p>
+        <p>O método aplicado é o <strong>Berg Architecture Protocol™</strong>: diagnóstico, arquitetura, ativação e sustentação — nessa ordem, sem pular etapa.</p>
+        <div class="credentials">
+          <div>
+            <div class="cnum">10+</div>
+            <div class="clabel">ANOS EM OPERAÇÕES<br>COMPLEXAS NO BRASIL</div>
+          </div>
+          <div>
+            <div class="cnum">BR/FR</div>
+            <div class="clabel">OPERAÇÃO BICULTURAL<br>BRASIL–FRANÇA</div>
+          </div>
+          <div>
+            <div class="cnum">2</div>
+            <div class="clabel">SENTIDOS — ENTRADA<br>E SAÍDA DO BRASIL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="contato">
+  <div class="wrap">
+    <div class="final-inner reveal">
+      <div class="eyebrow">PRÓXIMO PASSO</div>
+      <h2>A esteira completa está em construção. A conversa não precisa esperar por ela.</h2>
+      <p>Conte um pouco sobre o seu negócio e o estágio em que está. Eu leio pessoalmente e retorno para entender se — e como — faz sentido estruturar sua saída do Brasil agora.</p>
+      <form class="lead" onsubmit="event.preventDefault(); this.innerHTML='<div style=\'padding:28px 18px;color:#ece8de;font-family:IBM Plex Mono,monospace;font-size:13px;\'>Recebido. Retorno em breve, pessoalmente.</div>';">
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="Seu e-mail" required>
+        <input type="text" placeholder="Setor do seu negócio" required>
+        <select required>
+          <option value="" disabled selected>Estágio da empresa</option>
+          <option>Só considerando a possibilidade</option>
+          <option>Já pesquisando mercados de destino</option>
+          <option>Pronto para estruturar a entrada</option>
+        </select>
+        <button type="submit">ENVIAR</button>
+      </form>
+      <div class="form-note">SEM COMPROMISSO. SEM CALL DE VENDAS AUTOMÁTICA.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="logo" style="font-size:15px;">DIGITAL BERG <span>/ BRASIL</span></div>
+      <div class="footer-tag">ARCHITECTURE FIRST. ACCELERATION SECOND.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  const mapBox = document.getElementById('mapBox');
+  const mapIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        mapIo.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+  mapIo.observe(mapBox);
+</script>
+
+</body>
+</html>
